@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your EduSphere account">
+  <title>EduSphere — Create account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+  <main class="auth-page">
+
+    <section class="auth-showcase" aria-label="EduSphere introduction">
+
+      <a class="brand" href="dashboard.html"><span class="brand-mark">E</span>EduSphere</a>
+
+      <div class="showcase-copy">
+        <p class="eyebrow">STUDY SMARTER</p>
+        <h1>Build better learning habits, one day at a time.</h1>
+        <p>Keep your tasks, focus sessions, and academic goals in one calm workspace.</p>
+      </div>
+
+      <div class="showcase-card">
+        <span class="card-icon">✦</span>
+        <div><strong>Start your journey</strong><small>Organize today. Achieve more tomorrow.</small></div>
+      </div>
+
+    </section>
+
+    <section class="auth-panel">
+      <div class="form-wrap">
+        <p class="eyebrow">CREATE YOUR ACCOUNT</p>
+        <h2>Welcome to EduSphere</h2>
+        <p class="intro">Set up your workspace in less than a minute.</p>
+        
+        <form class="auth-form" id="registerForm">
+          <div class="name-row">
+
+            <label>
+              First name
+              <input type="text" id="firstName" name="firstName" placeholder="John" autocomplete="given-name"
+                required>
+            </label>
+
+            <label>
+              Last name
+              <input type="text" id="lastName" name="lastName" placeholder="Kumar" autocomplete="family-name" required>
+            </label>
+
+          </div>
+
+
+          <label>
+            Email address
+            <input type="email" id="registerEmail" name="email" placeholder="you@example.com" autocomplete="email"
+              required>
+          </label>
+
+
+          <label>
+            Course or program
+            <input type="text" id="program" name="program" placeholder="e.g. Computer Science"
+              autocomplete="organization">
+          </label>
+
+
+          <label>
+            Password
+            <input type="password" id="registerPassword" name="password" placeholder="Create a secure password"
+              autocomplete="new-password" minlength="8" required>
+          </label>
+
+
+          <label class="check-label">
+            <input type="checkbox" required>
+
+            <span>
+              I agree to the
+              <a href="#">Terms of Service</a>
+              and
+              <a href="#">Privacy Policy</a>.
+            </span>
+          </label>
+
+
+          <button class="submit-button" type="submit">
+            Create account <span>→</span>
+          </button>
+
+        </form>
+
+
+        <p class="form-footer">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+
+    </section>
+
+  </main>
+  <script src="register.js"></script>
+</body>
+
+</html>

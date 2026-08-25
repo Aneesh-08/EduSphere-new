@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To-do</title>
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-theme');
+    </script>
+
+    <link rel="stylesheet" href="todo.css">
+
+</head>
+
+
+<body>
+    <script>
+        if (document.documentElement.classList.contains('dark-theme')) document.body.classList.add('dark-theme');
+    </script>
+
+    <main class="todo-page">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="todo-header">
+
+            <div class="header-content">
+
+                <span class="eyebrow">
+                    PRODUCTIVITY
+                </span>
+
+                <h1>
+                    To-do
+                </h1>
+
+                <p>
+                    Stay organized, focus on what matters,
+                    and get things done.
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-task-btn"
+                id="add-task-btn"
+                type="button"
+            >
+
+                <span class="plus">+</span>
+
+                Add task
+
+            </button>
+
+        </header>
+
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div
+                    class="stat-number"
+                    id="total-tasks"
+                ></div>
+
+                <div class="stat-details">
+
+                    <span>Total tasks</span>
+
+                    <small>All your tasks</small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div
+                    class="stat-number pending-number"
+                    id="pending-tasks"
+                ></div>
+
+                <div class="stat-details">
+
+                    <span>Pending</span>
+
+                    <small>Still to complete</small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div
+                    class="stat-number completed-number"
+                    id="completed-tasks"
+                ></div>
+
+                <div class="stat-details">
+
+                    <span>Completed</span>
+
+                    <small>Tasks finished</small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= TASK SECTION ================= -->
+
+        <section class="tasks-section">
+
+
+            <div class="tasks-header">
+
+                <div>
+
+                    <h2>My tasks</h2>
+
+                    <p>
+                        Manage your tasks and stay on track.
+                    </p>
+
+                </div>
+
+
+                <!-- FILTERS -->
+
+                <div class="filters">
+
+                    <button
+                        class="filter-btn active"
+                        id="filter-all"
+                        type="button"
+                    >
+                        All
+                    </button>
+
+
+                    <button
+                        class="filter-btn"
+                        id ="filter-active"
+                        type="button"
+                    >
+                        Active
+                    </button>
+
+
+                    <button
+                        class="filter-btn"
+                        id = "filter-completed"
+                        type="button"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!--
+                EMPTY TASK CONTAINER
+
+                JavaScript will create tasks here.
+            -->
+
+            <div
+                class="task-list"
+                id="task-list"
+            ></div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= TASK MODAL ================= -->
+
+    <div
+        class="modal-overlay"
+        id="task-modal"
+    >
+
+        <div class="task-modal">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        TASK
+                    </span>
+
+                    <h2 id="modal-title">
+                        Add task
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="close-modal"
+                    id="close-modal"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ================= FORM ================= -->
+
+            <form id="task-form">
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label for="task-title">
+                        Task title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="task-title"
+                        placeholder="What do you need to do?"
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="task-description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="task-description"
+                        placeholder="Add some details..."
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- PRIORITY + DATE -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="task-priority">
+                            Priority
+                        </label>
+
+                        <select id="task-priority">
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option value="medium">
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="task-date">
+                            Due date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="task-date"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FORM BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancel-task"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save task
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <script> 
+
+        let tasks = JSON.parse(localStorage.getItem("tasks"))|| []
+
+        let curr_filter = "all"
+
+        let total = 0
+        let active = 0
+        let completed = 0
+
+        let total_task = document.querySelector("#total-tasks")
+        let pending_task = document.querySelector("#pending-tasks")
+        let completed_task = document.querySelector("#completed-tasks")
+
+        let all_btn = document.querySelector("#filter-all")
+        let active_btn = document.querySelector("#filter-active")
+        let completed_btn = document.querySelector("#filter-completed")
+
+        all_btn.addEventListener("click", function(){
+            curr_filter = "all"
+            display_tasks()
+        })
+
+        active_btn.addEventListener("click",function(){
+            curr_filter = "active"
+            display_tasks()
+        })
+
+        completed_btn.addEventListener("click",function(){
+            curr_filter = "completed"
+            display_tasks()
+        })
+
+
+    //================= opening the input form ===============
+        let add_btn = document.querySelector("#add-task-btn")
+
+        let task = document.querySelector("#task-modal")
+
+        add_btn.addEventListener("click", function() {
+            task.style.display = "flex"
+        })
+
+
+
+    //================= closing the input form =================
+        
+        let close_form = document.querySelector("#close-modal")
+
+        close_form.addEventListener("click",function() {
+             
+            task.style.display = "none"
+        })
+
+        let cancel = document.querySelector("#cancel-task")
+
+        cancel.addEventListener("click",function(){
+
+            task.style.display = "none"
+        })
+
+        let save_btn = document.querySelector(".save-btn") ; 
+        
+
+
+    //==================== adding task ======================
+    
+        let title = document.querySelector("#task-title")
+
+        let desc = document.querySelector("#task-description")
+
+        let prior = document.querySelector("#task-priority")
+
+        let date = document.querySelector("#task-date")
+
+        let task_form = document.querySelector("#task-form")
+
+        task_form.addEventListener("submit", function(e) {
+
+            e.preventDefault()
+            let task_2 = {
+                
+                title: title.value,
+                desc : desc.value,
+                prior : prior.value,
+                date : date.value,
+                complete : false
+            }
+
+          tasks.push(task_2)
+          localStorage.setItem("tasks", JSON.stringify(tasks))
+          display_tasks()
+          task.style.display = "none";
+        })
+
+        
+    // ===================  display task =========================== 
+      
+
+       let task_list = document.querySelector("#task-list")
+
+       function display_tasks(){
+
+        total = 0
+        active = 0
+        completed = 0
+
+        task_list.innerHTML = ""
+
+        for(let i = 0; i < tasks.length; i++){
+             
+            let task = tasks[i]
+
+            total++
+            if(task.complete == true){
+                completed++
+            }
+            else{
+                active++
+            }
+
+            if(curr_filter == "active" && task.complete == true){
+                continue
+            }
+
+            if(curr_filter == "completed" && task.complete == false){
+                continue
+            }
+
+            let task_card = document.createElement("div")
+
+            task_card.className = "task-card"
+
+            
+            // Top part of the card
+
+            let task_top = document.createElement("div")
+            task_top.className = "task-top"
+            task_card.appendChild(task_top)
+
+
+            // Checkbox 
+
+            let checkbox = document.createElement("input")
+            checkbox.type = "checkbox"
+            checkbox.checked = task.complete
+            task_top.appendChild(checkbox)
+
+            checkbox.addEventListener("click",function(){
+
+                task.complete = checkbox.checked
+                localStorage.setItem("tasks",JSON.stringify(tasks))
+                title.style.textDecoration = checkbox.checked ? "line-through" : "none"
+
+                display_tasks()
+            })
+
+
+            // Title 
+
+            let title = document.createElement("h3")
+            title.textContent = task.title
+            if(task.complete){
+                title.style.textDecoration = "line-through"
+            }
+            task_top.appendChild(title)
+            
+
+            // Priority
+
+            let priority = document.createElement("span")
+            priority.textContent = task.prior
+            task_top.appendChild(priority)
+
+
+            // Description
+
+            let descr = document.createElement("p")
+            descr.textContent = task.desc
+            task_card.appendChild(descr)
+
+
+           // bottom part of the card
+            
+            let bottom = document.createElement("div")
+            bottom.className = "task-bottom"
+            task_card.appendChild(bottom)
+
+            // date
+       
+            let date = document.createElement("span")
+            date.textContent = task.date
+            bottom.appendChild(date)
+
+
+            task_list.appendChild(task_card)
+
+            // delete
+
+            let del_btn = document.createElement("button")
+            del_btn.textContent = "Delete"
+            bottom.appendChild(del_btn)
+
+            del_btn.addEventListener("click", function(){
+                tasks.splice(i,1)
+                localStorage.setItem("tasks", JSON.stringify(tasks))
+                display_tasks()
+            })
+        }
+
+        total_task.textContent = total
+        pending_task.textContent = active
+        completed_task.textContent = completed
+    }
+
+    display_tasks()
+
+
+    </script>
+
+</body>
+
+</html>

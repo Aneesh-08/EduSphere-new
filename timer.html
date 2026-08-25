@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Focus Timer</title>
+
+    <link rel="stylesheet" href="timer.css">
+</head>
+
+<body>
+        <div class="stars"></div>
+        <div class="ocean"></div>
+        <div class="pomodoro">
+
+    <div class="timer-header">
+        <h1>Focus Timer</h1>
+        <button class="settings-button">⚙</button>
+    </div>
+
+    <div class="timer">
+        25:00
+    </div>
+
+    <div class="timer-mode">
+        Focus Session
+    </div>
+    <p class="session-count">
+    Completed Sessions: 0
+        </p>
+
+    <div class="controls">
+        <button class="start">Start</button>
+        <button class="pause">Pause</button>
+        <button class="reset">Reset</button>
+    </div>
+
+    <div class="settings-panel">
+
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button class="close-settings">✕</button>
+        </div>
+
+        <div class="manual-timing">
+
+            <h3>Manual Timing</h3>
+
+            <div>
+                <label for="focus-time">Focus Time</label>
+                <input type="number" id="focus-time" value="25">
+            </div>
+
+            <div>
+                <label for="break-time">Break Time</label>
+                <input type="number" id="break-time" value="5">
+                
+            </div>
+            <p class="settings-error"></p>
+            <button class="reset-sessions">Reset Sessions</button>
+            <button class="save-settings">Save Settings</button>
+
+        </div>
+
+        <div class="theme-settings">
+
+            <h3>Theme</h3>
+
+            <button class="stars-theme">🌌 Stars</button>
+            <button class="ocean-theme">🌊 Ocean</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="timer.js"></script>
+</body>
+</html>
